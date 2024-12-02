@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  orgnizations-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: organization-main-service
+    ports:
+      - "8000:8000"
+    environment:
+      - MASTER_DB_URL=${MASTER_DB_URL}
+      - SECRET_KEY=${SECRET_KEY}
+      - ENV_NAME=${ENV_NAME}
+    volumes:
+      - .:/code
+    command: uvicorn organizations.main:orgApp --host 0.0.0.0 --port 8000
